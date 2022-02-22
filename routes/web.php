@@ -19,9 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/rules', [RuleController::class, 'index'])->name('rules.index');
-
-
+// Route::get('/rules', [RuleController::class, 'index'])->name('rules.index');
+// Route::get('/rules/create', [RuleController::class, 'create'])->name('rules.create');
+// Route::post('/rules', [RuleController::class, 'store'])->name('rules.store');
+// Route::get('/rules/{rule}', [RuleController::class, 'show'])->name('rules.show');
+// Route::get('/rules/{rule}/edit', [RuleController::class, 'edit'])->name('rules.edit');
+// Route::post('/rules/{rule}', [RuleController::class, 'update'])->name('rules.update');
+Route::resource('rules', RuleController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

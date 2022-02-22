@@ -14,8 +14,9 @@ class RuleController extends Controller
      */
     public function index()
     {
+        $status = 'index';
         $rules = Rule::with('category')->get();
-        return view('rules.index', ['rules' => $rules]);
+        return view('rules.index', ['rules' => $rules, 'status' => $status]);
     }
 
     /**
@@ -47,7 +48,9 @@ class RuleController extends Controller
      */
     public function show(Rule $rule)
     {
-        //
+        $status = 'show';
+        $rules = Rule::with('category')->get();
+        return view('rules.index', ['rule' => $rule, 'rules' => $rules, 'status' => $status]);
     }
 
     /**
@@ -58,7 +61,7 @@ class RuleController extends Controller
      */
     public function edit(Rule $rule)
     {
-        //
+
     }
 
     /**
