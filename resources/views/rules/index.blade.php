@@ -39,6 +39,15 @@
             value="{{ $rule->description }}"
             {{ $status==='show' ? 'readonly' : '' }}>
       </div>
+      <div class="relative">
+        <select
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            name="category_id">
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+      </div>
       <div class="flex items-center justify-between">
         <input
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -47,7 +56,10 @@
         </div>
     </form>
     <form action="{{ route('rules.edit', $rule) }}">
-        <input type="submit" value="edit">
+        <input
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+            value="edit">
     </form>
 </div>
 @endif
@@ -80,6 +92,17 @@
             type="text"
             value="">
       </div>
+      {{-- the category select --}}
+      <div class="relative">
+        <select
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            name="category_id">
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+      </div>
+
       <div class="flex items-center justify-between">
         <input
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -92,7 +115,10 @@
 
 <hr>
 <form action="{{ route('rules.create') }}" method="get">
-    <input type="submit" value="toon form voor nieuwe regel">
+    <input
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit"
+        value="toon form voor nieuwe regel">
 </form>
 <hr>
 <div class="container mx-auto">

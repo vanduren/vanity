@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Rule;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,9 @@ class RuleController extends Controller
     {
         $status = 'create';
         $rules = Rule::all();
-        return view('rules.index', ['rules' => $rules, 'status' => $status]);
+        // $categories voor de dropdown
+        $categories = Category::orderBy('name')->get();
+        return view('rules.index', ['rules' => $rules, 'categories' => $categories, 'status' => $status]);
     }
 
     /**
@@ -43,7 +46,7 @@ class RuleController extends Controller
         $rule = new Rule();
         $rule->name = $request->input('rule-name');
         $rule->description = $request->input('rule-description');
-        $rule->category_id = 1;
+        $rule->category_id = $request->input('category_id');
         $rule->save();
         return redirect(route('rules.index'));
     }
@@ -57,8 +60,10 @@ class RuleController extends Controller
     public function show(Rule $rule)
     {
         $status = 'show';
+        // $categories voor de dropdown
+        $categories = Category::orderBy('name')->get();
         $rules = Rule::with('category')->get();
-        return view('rules.index', ['rule' => $rule, 'rules' => $rules, 'status' => $status]);
+        return view('rules.index', ['rule' => $rule, 'rules' => $rules, 'categories' => $categories, 'status' => $status]);
     }
 
     /**
@@ -69,10 +74,11 @@ class RuleController extends Controller
      */
     public function edit(Rule $rule)
     {
-        // dd($rule);
         $status = 'edit';
         $rules = Rule::with('category')->get();
-        return view('rules.index', ['rule' => $rule, 'rules' => $rules, 'status' => $status]);
+        // $categories voor de dropdown
+        $categories = Category::orderBy('name')->get();
+        return view('rules.index', ['rule' => $rule, 'rules' => $rules, 'categories' =>$categories, 'status' => $status]);
     }
 
     /**
