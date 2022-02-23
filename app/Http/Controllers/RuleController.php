@@ -15,7 +15,7 @@ class RuleController extends Controller
     public function index()
     {
         $status = 'index';
-        $rules = Rule::with('category')->get();
+        $rules = Rule::with('category')->orderBy('name')->get();
         return view('rules.index', ['rules' => $rules, 'status' => $status]);
     }
 
@@ -26,7 +26,9 @@ class RuleController extends Controller
      */
     public function create()
     {
-        //
+        $status = 'create';
+        $rules = Rule::all();
+        return view('rules.index', ['rules' => $rules, 'status' => $status]);
     }
 
     /**
@@ -37,7 +39,13 @@ class RuleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $rule = new Rule();
+        $rule->name = $request->input('rule-name');
+        $rule->description = $request->input('rule-description');
+        $rule->category_id = 1;
+        $rule->save();
+        return redirect(route('rules.index'));
     }
 
     /**
@@ -61,7 +69,10 @@ class RuleController extends Controller
      */
     public function edit(Rule $rule)
     {
-
+        // dd($rule);
+        $status = 'edit';
+        $rules = Rule::with('category')->get();
+        return view('rules.index', ['rule' => $rule, 'rules' => $rules, 'status' => $status]);
     }
 
     /**
@@ -73,7 +84,10 @@ class RuleController extends Controller
      */
     public function update(Request $request, Rule $rule)
     {
-        //
+        $rule->name = $request->input('rule-name');
+        $rule->description = $request->input('rule-description');
+        $rule->update();
+        return redirect()->route('rules.index');
     }
 
     /**

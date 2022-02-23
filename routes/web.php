@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RuleController;
+use App\Models\Category;
 use App\Models\Rule;
 use Illuminate\Support\Facades\Route;
 
